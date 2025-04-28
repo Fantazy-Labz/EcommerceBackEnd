@@ -7,7 +7,8 @@ class User(AbstractUser):
     """
     Custom user model that extends the AbstractUser class.
     """
-    first_name = models.CharField(max_length=255, blank=True)
+    
+    username = models.CharField(max_length=255, blank=True)
     last_name = models.CharField(max_length=255, blank=True)
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15, blank=True)
@@ -15,7 +16,7 @@ class User(AbstractUser):
     is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ["first_name", "last_name", "phone_number"]
+    REQUIRED_FIELDS = ["username", "last_name", "phone_number"]
 
     def __str__(self):
         return self.email
