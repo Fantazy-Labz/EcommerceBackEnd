@@ -1,0 +1,15 @@
+asgiref
+dj-database-url
+Django
+django-cors-headers
+djangorestframework
+djangorestframework-simplejwt
+lxml
+pillow
+PyJWT
+python-decouple
+pytils
+six
+sqlparse
+tools
+typing_extensions
