@@ -3,7 +3,7 @@
 ![Django Version](https://img.shields.io/badge/Django-5.2-green.svg)
 ![Python Version](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Stripe](https://img.shields.io/badge/Payments-Stripe-purple.svg)
-![License](https://img.shields.io/badge/License-MIT-orange.svg)
+
 
 Una plataforma de comercio electrónico robusta, escalable y moderna desarrollada con Django y Django REST Framework. Este proyecto implementa funcionalidades esenciales para una tienda en línea, incluyendo gestión de productos, usuarios, carrito de compras, procesamiento de pagos con Stripe y más.
 
