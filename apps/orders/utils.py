@@ -1,5 +1,41 @@
 import uuid
 
+class SessionCart:
+    SESSION_KEY = 'cart'
+
+    def __init__(self, request):
+        self.session = request.session
+        self.cart = self.session.get(self.SESSION_KEY, {})
+
+    def add(self, product_id, quantity):
+        product_id = str(product_id)
+        if product_id in self.cart:
+            self.cart[product_id] += quantity
+        else:
+            self.cart[product_id] = quantity
+        self.save()
+
+    def remove(self, product_id):
+        product_id = str(product_id)
+        if product_id in self.cart:
+            del self.cart[product_id]
+            self.save()
+
+    def clear(self):
+        self.session[self.SESSION_KEY] = {}
+        self.session.modified = True
+
+    def save(self):
+        self.session[self.SESSION_KEY] = self.cart
+        self.session.modified = True
+
+    def get_items(self):
+        return self.cart
+
+    def total_count(self):
+        return sum(self.cart.values())
+
+
 class OrderManager:
     
     @staticmethod
