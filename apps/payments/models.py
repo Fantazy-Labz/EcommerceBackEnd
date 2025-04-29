@@ -24,6 +24,7 @@ class Payment(models.Model):
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='pending')
+    currency = models.CharField(max_length=3, default='MXN')
     
     transaction_id = models.CharField(max_length=255, blank=True, null=True)
     payment_intent_id = models.CharField(max_length=255, blank=True, null=True)

@@ -24,3 +24,8 @@ class RefundSerializer(serializers.ModelSerializer):
             'status', 'created_at', 'updated_at'
         ]
         read_only_fields = ('id', 'created_at', 'updated_at')
+
+class CheckoutSerializer(serializers.Serializer):
+    shipping_address = serializers.CharField(required=True)
+    contact_phone = serializers.CharField(required=True)
+    payment_method = serializers.CharField(default='card')

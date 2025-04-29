@@ -56,3 +56,4 @@ typing-extensions==4.13.2
     # via
     #   -r requirements.in
     #   dj-database-url
+stripe==7.0.0
