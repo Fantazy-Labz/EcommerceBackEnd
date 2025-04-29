@@ -19,6 +19,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv() 
 DOMAIN = os.environ.get('DOMAIN')
+EMAIL = os.environ.get('EMAIL')
+_EMAIL_HOST = os.environ.get('EMAIL_HOST')
+_EMAIL_PORT = os.environ.get('EMAIL_PORT')
+SECRET_EMAIL_KEY = os.environ.get('SECRET_EMAIL_KEY')
+AUTH_MODEL = os.environ.get('AUTH_MODEL')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -149,13 +154,13 @@ CORS_ALLOW_ALL_ORIGINS = True  # Solo para desarrollo
 # CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
 
 # User model
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'AUTH_MODEL' 
 
 
 # Configuración de email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Ajusta según tu proveedor
-EMAIL_PORT = 587
+EMAIL_HOST = _EMAIL_HOST  # Ajusta según tu proveedor
+EMAIL_PORT = _EMAIL_PORT
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'david.salomon.nava11@gmail.com'  # Reemplaza con tu correo
-EMAIL_HOST_PASSWORD = 'twcs fqsh qlsc wlvq'  # Reemplaza con tu contraseña de aplicación
+EMAIL_HOST_USER = EMAIL  # Reemplaza con tu correo
+EMAIL_HOST_PASSWORD = SECRET_EMAIL_KEY  # Reemplaza con tu contraseña de aplicación
