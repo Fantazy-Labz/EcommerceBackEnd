@@ -15,15 +15,18 @@ class User(AbstractUser):
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ["username", "last_name", "phone_number"]
-
+    
     def __str__(self):
         return self.email
 
 
 class Address(models.Model):
-    
+
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='addresses')
     address_line1 = models.CharField(max_length=255)
     address_line2 = models.CharField(max_length=255, blank=True)

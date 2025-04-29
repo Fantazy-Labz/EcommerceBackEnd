@@ -150,3 +150,12 @@ CORS_ALLOW_ALL_ORIGINS = True  # Solo para desarrollo
 
 # User model
 AUTH_USER_MODEL = 'users.User'
+
+
+# Configuración de email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Ajusta según tu proveedor
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'david.salomon.nava11@gmail.com'  # Reemplaza con tu correo
+EMAIL_HOST_PASSWORD = 'twcs fqsh qlsc wlvq'  # Reemplaza con tu contraseña de aplicación
