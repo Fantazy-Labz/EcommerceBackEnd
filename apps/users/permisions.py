@@ -21,5 +21,5 @@ class OnlyAdmin:
 
 class OnlyAdminOrCurrentUser(BasePermission):
     def has_object_permission(self, request, view, obj):
-        # Solo permite si es superusuario o si es el dueño del objeto
+
         return request.user.is_superuser or obj.id == request.user.id

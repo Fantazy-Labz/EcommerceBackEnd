@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirma tu correo</title>
+</head>
+<body>
+    <h2>¡Hola {{ username }}!</h2>
+    <p>Gracias por registrarte. Por favor confirma tu correo electrónico dando click en el siguiente enlace:</p>
+    <a href="http://{{ domain }}{% url 'verify_email' token=token %}" class="btn">VERIFICAR MI CUENTA</a>
+    <p>Si no te registraste, puedes ignorar este correo.</p>
+</body>
+</html>
