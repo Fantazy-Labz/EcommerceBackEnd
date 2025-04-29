@@ -23,6 +23,7 @@ class User(AbstractUser):
 
 
 class Address(models.Model):
+    
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='addresses')
     address_line1 = models.CharField(max_length=255)
     address_line2 = models.CharField(max_length=255, blank=True)
