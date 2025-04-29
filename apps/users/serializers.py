@@ -9,10 +9,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             'id', 'email', 'username', 'last_name', 
-            'is_active', "phone_number", "is_verified",
-            'created_at', 'updated_at'
+            'is_active', "phone_number", "is_email_verified",
+            'created_at', 'updated_at', "verification_token"
         ]
-        read_only_fields = ('id', 'created_at', 'updated_at', "is_verified" )
+        read_only_fields = ('id', 'created_at', 'updated_at', "is_email_verified" , "is_active", "verification_token")
 
 
 class AdressSerializer(serializers.ModelSerializer):

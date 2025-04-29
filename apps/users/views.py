@@ -1,12 +1,18 @@
 from .models import User, Address
-from apps.users.permisions import OnlyAdminOrCurrentUser, OnlyAdmin
+from apps.users.permisions import OnlyAdmin
+from rest_framework.permissions import AllowAny
 from rest_framework import generics
 from .serializers import UserSerializer, AdressSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.core.mail import EmailMultiAlternatives
 from rest_framework import status
+from django.template.loader import render_to_string
+from django.urls import reverse
+import os
+import uuid
 
 # Create your views here.
 class UserListView(generics.ListCreateAPIView):
@@ -34,31 +40,34 @@ class AdressDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [ OnlyAdmin ]
 
 class RegisterView(generics.CreateAPIView):
+    permission_classes = [AllowAny]
     serializer_class = UserSerializer
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
+        
         if serializer.is_valid():
             user = serializer.save()
             user.is_active = False
+            user.verification_token = uuid.uuid4()
             user.save()
-            domain = os.environ.get('DOMAIN')
 
-            token, created = Token.objects.get_or_create(user=user)
+            # Ahora que ya existe el token, podemos hacer el reverse
+            relative_link = reverse('verify-email', kwargs={'token': str(user.verification_token)})
+            domain = os.environ.get('DOMAIN')  
+            confirmation_link = f"{domain}{relative_link}"
 
-            confirmation_link = f"{domain}/{token}/"
-            
-            # Renderizar el template
-            html_content = render_to_string('emails/confirm_email.html', {
+            html_content = render_to_string('confirm_email.html', {
                 'username': user.username,
-                'confirmation_link': confirmation_link
+                'domain': 'http://localhost:8000/',
+                'token': user.verification_token,
             })
 
-            # Crear el correo
+
             email = EmailMultiAlternatives(
                 subject='Confirma tu correo',
                 body='Por favor confirma tu correo.',
-                from_email=settings.DEFAULT_FROM_EMAIL,
+                from_email=os.environ.get('EMAIL_HOST_USER'),
                 to=[user.email],
             )
             email.attach_alternative(html_content, "text/html")
@@ -71,7 +80,7 @@ class RegisterView(generics.CreateAPIView):
             }, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    
 
 class VerifyEmailView(APIView):
     def get(self, request, token):
@@ -79,7 +88,7 @@ class VerifyEmailView(APIView):
             user = User.objects.get(verification_token=token)
             user.is_active = True
             user.is_email_verified = True
-            user.verification_token = None  # Eliminar el token para evitar reuso
+            user.verification_token = None  # Limpias el token
             user.save()
             return Response({'message': 'Correo verificado. Ya puedes iniciar sesión.'}, status=status.HTTP_200_OK)
         except User.DoesNotExist:

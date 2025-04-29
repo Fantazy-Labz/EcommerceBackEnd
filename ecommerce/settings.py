@@ -154,7 +154,8 @@ CORS_ALLOW_ALL_ORIGINS = True  # Solo para desarrollo
 # CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
 
 # User model
-AUTH_USER_MODEL = 'AUTH_MODEL' 
+AUTH_USER_MODEL = 'users.User'
+
 
 
 # Configuración de email

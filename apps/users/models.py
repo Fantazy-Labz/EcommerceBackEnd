@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
-
+import uuid
 # Create your custom User model
 class User(AbstractUser):
     """
@@ -12,8 +12,10 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=255, blank=True)
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15, blank=True)
-    is_verified = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    is_email_verified = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True)
+    verification_token = models.UUIDField(default=uuid.uuid4, editable=False)
 
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)

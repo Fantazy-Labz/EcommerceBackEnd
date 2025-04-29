@@ -1,12 +1,192 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Confirma tu correo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirma tu correo - YTH</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header {
+            background-color: #000000;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            margin: -20px -20px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            font-style: italic;
+            text-decoration: none;
+        }
+
+        .content {
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        p {
+            margin-bottom: 25px;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #000000;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 0 25px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #333;
+        }
+
+        .footer {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            font-size: 14px;
+            color: #777;
+            text-align: center;
+        }
+
+        .product-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .product-card {
+            width: 120px;
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .product-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        .product-price {
+            font-size: 12px;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px 10px;
+                padding: 15px;
+            }
+            
+            header {
+                padding: 12px 15px;
+                margin: -15px -15px 15px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>¡Hola {{ username }}!</h2>
-    <p>Gracias por registrarte. Por favor confirma tu correo electrónico dando click en el siguiente enlace:</p>
-    <a href="http://{{ domain }}{% url 'verify_email' token=token %}" class="btn">VERIFICAR MI CUENTA</a>
-    <p>Si no te registraste, puedes ignorar este correo.</p>
+    <div class="container">
+        <header>
+            <a href="#" class="logo">YTH</a>
+        </header>
+        
+        <div class="content">
+            <h2>¡Hola {{ username }}!</h2>
+            
+            <p>Gracias por registrarte en YTH. Para completar tu registro, por favor confirma tu correo electrónico haciendo clic en el botón:</p>
+            
+            <a href="http://{{ domain }}{% url 'verify-email' token %}" class="btn">VERIFICAR MI CUENTA</a>
+            
+            <p>Si no solicitaste este registro, puedes ignorar este mensaje.</p>
+            
+            <h3>Productos que podrían interesarte:</h3>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1593032465171-8c2b429d0e3b?auto=format&fit=crop&w=400&q=80" alt="THE TRIP Tee">
+                    <div class="product-title">THE TRIP Tee</div>
+                    <div class="product-price">$449 MXN</div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1612444530612-13056e6c5575?auto=format&fit=crop&w=400&q=80" alt="SPACE Hoodie">
+                    <div class="product-title">SPACE Hoodie</div>
+                    <div class="product-price">$849 MXN</div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1626947346161-7d6e594c7c13?auto=format&fit=crop&w=400&q=80" alt="ARTIFICIAL WORLD">
+                    <div class="product-title">ARTIFICIAL WORLD</div>
+                    <div class="product-price">$399 MXN</div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1585386959984-a4155221ad42?auto=format&fit=crop&w=400&q=80" alt="PROYECTO YTH">
+                    <div class="product-title">PROYECTO YTH</div>
+                    <div class="product-price">$399 MXN</div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p>© 2025 YTH - Todos los derechos reservados</p>
+                <p>Si tienes problemas con el botón, copia y pega este enlace en tu navegador:</p>
+                <p>http://{{ domain }}{% url 'verify-email' token %}</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

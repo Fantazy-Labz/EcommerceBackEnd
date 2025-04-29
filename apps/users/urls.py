@@ -21,8 +21,8 @@ urlpatterns = [
     path('addresses/<int:pk>/', AdressDetailView.as_view(), name='address_detail'),  # Detalles, actualización y eliminación de dirección
 
     # Rutas de autenticación
-    path('register/', RegisterView.as_view(), name='register'),  # Registro de usuario
-    path('verify-email/<uuid:token>/', VerifyEmailView.as_view(), name='verify_email'),  # Confirmación de email
+    path('register/', RegisterView.as_view(), name='register'),
+    path('verify-email/<uuid:token>/', VerifyEmailView.as_view(), name='verify-email'),
     path('login/', LoginView.as_view(), name='login'),  # Inicio de sesión
     path('logout/', LogoutView.as_view(), name='logout'),  # Cierre de sesión
 
