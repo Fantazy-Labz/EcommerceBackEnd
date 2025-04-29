@@ -24,11 +24,6 @@ class User(AbstractUser):
 
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='addresses')
-    address_type = models.CharField(
-        max_length=20, 
-        choices=[('shipping', 'Shipping'), ('billing', 'Billing')]
-    )
-    default = models.BooleanField(default=False)
     address_line1 = models.CharField(max_length=255)
     address_line2 = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=100)
